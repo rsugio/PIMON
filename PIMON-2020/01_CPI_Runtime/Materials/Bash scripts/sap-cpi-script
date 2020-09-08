@@ -1,0 +1,50 @@
+#!/bin/bash
+
+config_file=~/.config/sap/sap-cpi-env-script.conf
+mandatory_params=("runtime_node_address" "api_path" "username" "password")
+
+[[ ! -f $config_file ]] && echo "Configuration file $config_file does not exist" && exit 1
+
+# echo "Configuration file: $(realpath $config_file)"
+. $config_file
+
+missing_params_count=0
+for param in "${mandatory_params[@]}"
+do
+    [[ -z "${!param}" ]] && echo "Parameter $param is missing" && (( missing_params_count++ ))
+done
+
+[[ "$missing_params_count" -gt 0 ]] && echo "$missing_params_count mandatory parameter(s) is(are) missing, check configuration file" && exit 1
+
+for i in "$@"
+do
+case $i in
+    -s=*|--script=*)
+    script_file="${i#*=}"
+    shift
+    ;;
+    -f=*|--function=*)
+    function="${i#*=}"
+    shift
+    ;;
+    *)  # unknown argument
+    ;;
+esac
+done
+
+[[ -z "$script_file" ]] && echo "Script is missing, check command line arguments" && exit 1
+
+[[ ! -f $script_file ]] && echo "Script file $script_file does not exist" && exit 1
+
+endpoint="https://$runtime_node_address/http$api_path"
+
+# echo "API endpoint: $endpoint"
+# echo "Script file: $(realpath $script_file)"
+# echo "Function: $function"
+
+# echo -e "\n--------------------------------------------------"
+curl --user $username:$password \
+    --request POST \
+	--data-binary "@$script_file" \
+    "$endpoint?function=$function"
+# echo -e "\n--------------------------------------------------"

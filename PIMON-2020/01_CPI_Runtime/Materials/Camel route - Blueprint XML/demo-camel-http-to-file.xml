@@ -1,0 +1,31 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
+	<camelContext id="demo"
+            		xmlns="http://camel.apache.org/schema/blueprint">
+		<restConfiguration component="jetty"
+                 			host="0.0.0.0"
+                 			port="8282"/>
+		<rest path="/demo">
+			<post uri="/{Name}"
+    				consumes="application/json">
+				<route id="demo-api-create-local-file">
+					<setHeader name="CamelFileName">
+						<simple>demo-${header.Name.toLowerCase()}.json</simple>
+					</setHeader>
+					<log message="Processing request and creating file ${header.CamelFileName}"/>
+					<to uri="file:///D:/tmp"/>
+					<setHeader name="Content-Type">
+						<constant>application/json</constant>
+					</setHeader>
+					<transform>
+						<simple>
+							{
+							"Timestamp": "${date:now:yyyy-MM-dd HH:mm:ss.SSS z}",
+							"File": "${header.CamelFileName}"
+							}
+						</simple>
+					</transform>
+				</route>
+			</post>
+		</rest>
+	</camelContext>
+</blueprint>

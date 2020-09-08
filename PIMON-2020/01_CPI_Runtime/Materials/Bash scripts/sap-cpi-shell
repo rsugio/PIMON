@@ -1,0 +1,50 @@
+#!/bin/bash
+
+config_file=~/.config/sap/sap-cpi-env-shell.conf
+mandatory_params=("runtime_node_address" "api_path" "username" "password")
+
+[[ ! -f $config_file ]] && echo "Configuration file $config_file does not exist" && exit 1
+
+# echo "Configuration file: $(realpath $config_file)"
+. $config_file
+
+missing_params_count=0
+for param in "${mandatory_params[@]}"
+do
+    [[ -z "${!param}" ]] && echo "Parameter $param is missing" && (( missing_params_count++ ))
+done
+
+[[ "$missing_params_count" -gt 0 ]] && echo "$missing_params_count mandatory parameter(s) is(are) missing, check configuration file" && exit 1
+
+for i in "$@"
+do
+case $i in
+    -t=*|--type=*)
+    type="${i#*=}"
+    shift
+    ;;
+    -c=*|--command=*)
+    command="${i#*=}"
+    shift
+    ;;
+    *)  # unknown argument
+    ;;
+esac
+done
+
+[[ -z "$type" ]] && echo "Command type is missing, check command line arguments" && exit 1
+[[ -z "$command" ]] && echo "Command is missing, check command line arguments" && exit 1
+
+[[ "$type" != @(os|osgi) ]] && echo "Unsupported command type: $type. Supported command types: os, osgi" && exit 1
+
+endpoint="https://$runtime_node_address/http$api_path/$type"
+
+# echo "API endpoint: $endpoint"
+# echo "Command: $command"
+
+# echo -e "\n--------------------------------------------------"
+curl --user $username:$password \
+    --get \
+	--data-urlencode "command=$command" \
+    $endpoint
+# echo -e "\n--------------------------------------------------"
