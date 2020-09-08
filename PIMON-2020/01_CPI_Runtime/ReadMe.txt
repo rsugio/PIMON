@@ -1,3 +1,6 @@
+
+Видеозапись выступления: https://youtu.be/IFPZZ6yG1Tc
+
 ***** Инструменты
 Среда выполнения и основные инструменты
 - SAP CPI тенант: SAP CPI Trial в Cloud Foundry (Amazon Web Services - Europe (Frankfurt))
