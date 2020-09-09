@@ -166,14 +166,14 @@ public class XMLDSig implements Module {
 					keystore = eu.ibagroup.sappo.keystore.LocalKeyStore.secrets.get(userId);
 					
 					if (keystore == null) {
-						audit.addAuditLogEntry(amk, AuditLogStatus.ERROR, "LocalKeystore_PL doesn't contain a private key for specified declarant: " + userId);
+						audit.addAuditLogEntry(amk, AuditLogStatus.ERROR, "LocalKeystore doesn't contain a private key for specified signer: " + userId);
 					}
 					
 					// password to access local PFX keystore
 					String passwordEncoded = eu.ibagroup.sappo.keystore.LocalKeyStore.passwords.get(userId);
 					
 					if (passwordEncoded == null) {
-						audit.addAuditLogEntry(amk, AuditLogStatus.ERROR, "LocalKeystore_PL doesn't contain a password to access PFX keystore for declarant: " + userId);
+						audit.addAuditLogEntry(amk, AuditLogStatus.ERROR, "LocalKeystore doesn't contain a password to access PFX keystore for signer: " + userId);
 					}
 					
 					try {
