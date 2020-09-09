@@ -46,7 +46,7 @@ import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
  * Session Bean implementation class XMLDSig
  */
 
-@Stateless(name="AM_XMLDSig")
+@Stateless(name="AM_XAdES")
 @Local(value={ModuleLocal.class})
 @Remote(value={ModuleRemote.class})
 @LocalHome(value=ModuleLocalHome.class)
@@ -61,7 +61,7 @@ public class XMLDSig implements Module {
 	public static final String DC_PROPERTY = "signer.id"; // dynamic configuration property; parameter value format -> "dc|<namespace>|<property_name>" 
 	public static final String XML_SIGNATURE_FORMAT = "signature.format"; // XAdES, JSR105
 	
-	public static final String ADAPTER_MODULE_NAME = "AM_XMLDSig"; 
+	public static final String ADAPTER_MODULE_NAME = "AM_XAdES"; 
 	public static final String DEFAULT_SIGNATURE_FORMAT = Format.XAdES.toString();
 	
 	
