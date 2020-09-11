@@ -34,7 +34,18 @@
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="var" path="XAdES4j_LIBS"/>
+	<classpathentry kind="var" path="XAdES4j_LIBS/aopalliance-1.0.jar"/>
+	<classpathentry kind="var" path="XAdES4j_LIBS/bcpkix-jdk15on-1.56.jar"/>
+	<classpathentry kind="var" path="XAdES4j_LIBS/bcprov-jdk15on-1.56.jar"/>
+	<classpathentry kind="var" path="XAdES4j_LIBS/commons-codec-1.10.jar"/>
+	<classpathentry kind="var" path="XAdES4j_LIBS/guice-2.0.jar"/>
+	<classpathentry kind="var" path="XAdES4j_LIBS/guice-multibindings-2.0.jar"/>
+	<classpathentry kind="var" path="XAdES4j_LIBS/slf4j-api-1.7.22.jar"/>
+	<classpathentry kind="var" path="XAdES4j_LIBS/stax-api-1.0-2.jar"/>
+	<classpathentry kind="var" path="XAdES4j_LIBS/stax2-api-3.1.4.jar"/>
+	<classpathentry kind="var" path="XAdES4j_LIBS/woodstox-core-asl-4.4.1.jar"/>
+	<classpathentry kind="var" path="XAdES4j_LIBS/xades4j-1.5.0.jar"/>
+	<classpathentry kind="var" path="XAdES4j_LIBS/xmlsec-2.0.9.jar"/>
 	<classpathentry kind="var" path="SAP_SEC_SSF"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

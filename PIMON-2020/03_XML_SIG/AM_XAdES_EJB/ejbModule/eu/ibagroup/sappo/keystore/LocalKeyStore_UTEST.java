@@ -8,6 +8,6 @@ public class LocalKeyStore_UTEST {
 		
 	};
 	
-	public static final String PFX_PASS = "UTEST_PASSWROD";
+	public static final String PFX_PASS = "base64 encoded string";
 
 }
